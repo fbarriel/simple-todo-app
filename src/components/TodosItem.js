@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { Component } from "react"
 
-function TodoItem(props) {
-    const { completed, id, title } = props.todo
+class TodoItem extends Component {
+  render() {
+    const { completed, id, title } = this.props.todo
     return (
         <li className="todo-item">
           <input
             type="checkbox"
             checked={completed}
-            onChange={() => props.handleChangeProps(id)}
+            onChange={() => this.props.handleChangeProps(id)}
           />
-          <button onClick={() => props.deleteTodoProps(id)}>
+          <button onClick={() => this.props.deleteTodoProps(id)}>
             Delete
           </button>
           <span style={completed ? completedStyle : null}>
@@ -18,6 +19,12 @@ function TodoItem(props) {
         </li>
       )
     }
+
+    componentWillUnmount() {
+      alert("Item about to be deleted!");
+    }
+  }
+    
 
 const completedStyle = {
     fontStyle: "italic",
